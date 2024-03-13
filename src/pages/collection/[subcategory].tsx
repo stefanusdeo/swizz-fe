@@ -21,10 +21,14 @@ export default function Home() {
       handleGetSubCategoryDetail(subSlug?.toString())
         .then((res) => {
           if (res.code === 200) {
-            if (res.data?.subCategoryList[0].is_custom === 1) {
-              setIsLoading(false);
+            if (res.data?.subCategoryList) {
+              if (res.data?.subCategoryList[0].is_custom === 1) {
+                setIsLoading(false);
+              } else {
+                router.push(`/collection/${subSlug}/classic`);
+              }
             } else {
-              router.push(`/collection/${subSlug}/classic`);
+              router.push("/404");
             }
           } else {
             router.push("/404");
