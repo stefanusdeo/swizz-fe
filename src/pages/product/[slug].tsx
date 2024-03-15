@@ -956,7 +956,7 @@ export default function Home() {
       var transformerToRemove = stageLayer.find(
         '#' + 'image2-custom-transform'
       )[0];
-      transformerToRemove.destroy();
+      transformerToRemove?.destroy();
     } else {
       if (image2[index] === customImages2) {
         image2.splice(index, 2);
@@ -1303,7 +1303,7 @@ export default function Home() {
       var transformerToRemove = stageLayer.find(
         '#' + 'image3-custom-transform'
       )[0];
-      transformerToRemove.destroy();
+      transformerToRemove?.destroy();
     } else {
       if (image3[index] === customImages3) {
         image3.splice(index, 3);
@@ -1622,7 +1622,7 @@ export default function Home() {
       var transformerToRemove = stageLayer.find(
         '#' + 'image4-custom-transform'
       )[0];
-      transformerToRemove.destroy();
+      transformerToRemove?.destroy();
     } else {
       if (image4[index] === customImages4) {
         image4.splice(index, 4);
@@ -1899,7 +1899,7 @@ export default function Home() {
     }
     if (rightText === '' && rightTextNode && stageLayer) {
       var transformerToRemove = stageLayer.find('#' + 'transformRightText')[0];
-      transformerToRemove.destroy();
+      transformerToRemove?.destroy();
       rightTextNode.destroy();
       setRightTextNode(null);
       setPropRightText(defaultText);
@@ -2192,7 +2192,7 @@ export default function Home() {
     }
     if (leftText === '' && leftTextNode && stageLayer) {
       var transformerToRemove = stageLayer.find('#' + 'transformLeftText')[0];
-      transformerToRemove.destroy();
+      transformerToRemove?.destroy();
       leftTextNode.destroy();
       setLeftTextNode(null);
       setPropLeftText(defaultText);
