@@ -2103,6 +2103,7 @@ export default function Home() {
         let xRotate = getPostRect.x - postX;
         setActionRightText(false);
         text.opacity(0);
+
         let scale = text.scale();
         setPropRightText({
           ...propRightText,
@@ -2146,6 +2147,7 @@ export default function Home() {
       if (rightTextShadow === 0) {
         rightTextNode.strokeEnabled(false);
       }
+      rightTextNode.moveToTop();
       rightTextNode.fontStyle(rightTextFont === 'bold' ? 'bold' : 'normal');
     }
   };
@@ -2442,6 +2444,7 @@ export default function Home() {
       if (leftTextShadow === 0) {
         leftTextNode.strokeEnabled(false);
       }
+      leftTextNode.moveToTop();
       leftTextNode.fontStyle(leftTextFont === 'bold' ? 'bold' : 'normal');
     }
   };
@@ -2555,7 +2558,7 @@ export default function Home() {
         fontSize: 24,
         fill: rightNumberColor === '' ? '#000000' : rightNumberColor,
         draggable: true,
-        opacity: 0,
+        opacity: 1,
         id: 'rightNumber',
         fontFamily: 'agency',
         scaleX: 1,
@@ -2564,8 +2567,6 @@ export default function Home() {
       });
 
       setRightNumberNode(text);
-
-      console.log(text);
 
       layer.add(text);
       const transformNumber = new Konva.Transformer({
@@ -2735,6 +2736,7 @@ export default function Home() {
       if (rightNumberShadow === 0) {
         rightNumberNode.strokeEnabled(false);
       }
+      rightNumberNode.moveToTop();
       rightNumberNode.fontStyle(rightNumberFont === 'bold' ? 'bold' : 'normal');
     }
   };
@@ -2846,7 +2848,7 @@ export default function Home() {
         fontSize: 24,
         fill: leftNumberColor === '' ? '#000000' : leftNumberColor,
         draggable: true,
-        opacity: 0,
+        opacity: 1,
         id: 'leftNumber',
         fontFamily: 'agency',
         scaleX: 1,
@@ -3024,6 +3026,7 @@ export default function Home() {
       if (leftNumberShadow === 0) {
         leftNumberNode.strokeEnabled(false);
       }
+      leftNumberNode.moveToTop();
       leftNumberNode.fontStyle(leftNumberFont === 'bold' ? 'bold' : 'normal');
     }
   };
@@ -3534,7 +3537,7 @@ export default function Home() {
                 {leftText !== '' && (
                   <div
                     style={leftTextStyle()}
-                    className={`text-[24px] absolute ${
+                    className={`z-20 text-[24px] absolute ${
                       leftTextShadow === 1 ? 'text-stroke-border' : ''
                     } ${actionLeftText === false ? 'visible' : 'invisible'}`}
                   >
@@ -3545,7 +3548,7 @@ export default function Home() {
                 {rightNumber !== '' && (
                   <div
                     style={rightNumberStyle()}
-                    className={`text-[24px] absolute ${
+                    className={`z-20 text-[24px] absolute ${
                       rightNumberShadow === 1 ? 'text-stroke-border' : ''
                     } ${actionRightNumber === false ? 'visible' : 'invisible'}`}
                   >
@@ -3556,7 +3559,7 @@ export default function Home() {
                 {leftNumber !== '' && (
                   <div
                     style={leftNumberStyle()}
-                    className={`text-[24px] absolute ${
+                    className={`z-20 text-[24px] absolute ${
                       leftNumberShadow === 1 ? 'text-stroke-border' : ''
                     } ${actionLeftNumber === false ? 'visible' : 'invisible'}`}
                   >
