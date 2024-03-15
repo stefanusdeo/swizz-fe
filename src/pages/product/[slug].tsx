@@ -2276,8 +2276,6 @@ export default function Home() {
 
       setLeftTextNode(text);
 
-      console.log(text);
-
       layer.add(text);
       const transformText = new Konva.Transformer({
         nodes: [text],
@@ -2434,7 +2432,6 @@ export default function Home() {
   const modifyLeftText = () => {
     if (stageLayer && leftTextNode) {
       leftTextNode.text(leftText);
-      console.log(leftTextColor);
       leftTextNode.fill(leftTextColor === '' ? '#000000' : leftTextColor);
       if (leftTextShadow === 1) {
         leftTextNode.strokeEnabled(true);
@@ -2490,6 +2487,15 @@ export default function Home() {
     }
     if (propRightNumber.init === true && rightNumber !== '') {
       modifyRightNumber();
+    }
+    if (rightNumber === '' && rightNumberNode && stageLayer) {
+      var transformerToRemove = stageLayer.find(
+        '#' + 'transformRightNumber'
+      )[0];
+      transformerToRemove?.destroy();
+      rightNumberNode.destroy();
+      setRightNumberNode(null);
+      setPropRightNumber(defaultText);
     }
     if (rightNumber === '') {
       setRightNumberCustom([]);
@@ -2724,7 +2730,6 @@ export default function Home() {
   const modifyRightNumber = () => {
     if (stageLayer && rightNumberNode) {
       rightNumberNode.text(rightNumber);
-      console.log(rightNumberColor);
       rightNumberNode.fill(
         rightNumberColor === '' ? '#000000' : rightNumberColor
       );
@@ -2783,6 +2788,14 @@ export default function Home() {
     }
     if (leftNumber === '') {
       setLeftNumberCustom([]);
+    }
+
+    if (leftNumber === '' && leftNumberNode && stageLayer) {
+      var transformerToRemove = stageLayer.find('#' + 'transformLeftNumber')[0];
+      transformerToRemove?.destroy();
+      leftNumberNode.destroy();
+      setLeftNumberNode(null);
+      setPropLeftNumber(defaultText);
     }
     if (leftNumber !== '') {
       let leftNumberCustomList: ICustom[] = [];
@@ -2857,8 +2870,6 @@ export default function Home() {
       });
 
       setLeftNumberNode(text);
-
-      console.log(text);
 
       layer.add(text);
       const transformNumber = new Konva.Transformer({
@@ -3016,7 +3027,6 @@ export default function Home() {
   const modifyLeftNumber = () => {
     if (stageLayer && leftNumberNode) {
       leftNumberNode.text(leftNumber);
-      console.log(leftNumberColor);
       leftNumberNode.fill(leftNumberColor === '' ? '#000000' : leftNumberColor);
       if (leftNumberShadow === 1) {
         leftNumberNode.strokeEnabled(true);
