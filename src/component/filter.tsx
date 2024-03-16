@@ -33,7 +33,9 @@ const FilterList = ({
     <div>
       <div className="flex justify-between items-center" onClick={handleSelect}>
         <h3 className="cursor-pointer">{name}</h3>
-        {filterSelect.val.includes(id) ? <ExpandLess /> : <ExpandMore />}
+        <div className="cursor-pointer">
+          {filterSelect.val.includes(id) ? <ExpandLess /> : <ExpandMore />}
+        </div>
       </div>
       <Collapse in={filterSelect.val.includes(id)} timeout="auto" unmountOnExit>
         {children}
