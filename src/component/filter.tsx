@@ -149,7 +149,7 @@ const Filter = ({
   priceRange: Array<number>;
 }) => {
   return (
-    <div className="  hidden md:flex lg:flex lg2:flex w-[33%] md:w-[50%] lg2:w-[28%] text-[25px] p-4 px-10  flex-col gap-3">
+    <div className="  hidden md:flex lg:flex lg2:flex w-[33%] md:w-[50%] lg:w-[32%] lg2:w-[28%] text-[25px] p-4 px-10  flex-col gap-3">
       <b>FILTERS</b>
       <hr />
       <Availability filterSelect={filterSelect} />
