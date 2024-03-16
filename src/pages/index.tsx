@@ -229,7 +229,7 @@ export default function Home() {
       </section>
 
       {/* custom product */}
-      <div className="w-full my-20 px-7 lg:px-16 md:px-16 lg2:px-16">
+      <div className="w-full my-20 px-7 lg:px-16 md:px-16 lg2:px-52 ">
         <h1 className="text-center font-bold text-[16px]">
           TEST OUR CUSTOMIZE
         </h1>
@@ -239,11 +239,11 @@ export default function Home() {
 
         <div className="w-full lg:flex lg:flex-row lg:mt-10 gap-10">
           <div className="w-full lg:w-1/2">
-            <div className="w-full h-[20vh] lg:h-[40vw]">
+            <div className="w-full h-[20vh] lg:h-[25vw] ">
               <img
                 src={imageSource.imageBase64}
                 alt="Front of men&#039;s Basic Tee in black."
-                className="h-full w-full max-w-none object-contain object-center"
+                className="h-full w-full bg-gray-300  p-20 max-w-none object-contain object-center"
               />
             </div>
             <div className="inline-flex w-full gap-4 align-middle items-center mt-5">
@@ -266,7 +266,7 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="w-full lg:w-1/2">
+          <div className="w-full p-14 lg:w-1/2">
             <h1 className="font-semibold">SHINCUSTOM</h1>
             <h2 className="mt-3 text-[30px] font-extrabold ">
               {productHome?.name}
@@ -311,7 +311,7 @@ export default function Home() {
       </div>
       {/* custom product */}
 
-      <div className="w-full flex flex-col-reverse lg:flex-row align-middle items-center gap-16 my-20 px-7 md:px-16 lg:px-16 lg2:px-16">
+      <div className="w-full flex flex-col-reverse lg:flex-row align-middle items-center gap-16 my-20 px-7 md:px-16 lg:px-16 lg2:px-52 ">
         <div className="w-full lg:w-1/2">
           <h1 className="font-bold text-[16px] tracking-[1.5px] uppercase">
             {managementGeneralState.language === 'en' && content1.en.headerText}
@@ -351,19 +351,19 @@ export default function Home() {
         </div>
         <Image
           src={Content1Image}
-          className=" lg:h-[35pc] md:h-[35pc] lg2:h-[50pc]  w-[45pc] object-contain object-center"
+          className=" lg:h-[35pc] md:h-[35pc] lg2:h-[50pc]  w-[45pc]  object-contain object-center"
           alt="content-image"
         />
       </div>
 
-      <div className="w-full my-20 px-7 lg:px-16 lg2:px-16 ">
+      <div className="w-full my-20 px-7 lg:px-16 lg2:px-52 ">
         <div className="relative w-full">
           <Image
             src={MadeByImage}
             alt="made-by-image"
             className=" lg:h-[35pc] md:h-[38pc] lg2:h-[50pc]  w-[45pc] object-contain object-center"
           />
-          <div className="w-[80%] md:w-[50%] lg:w-[35%] p-5 lg:p-10 bg-black text-white absolute lg:top-1/4 top-3/4 md:top-5px  lg2:top-[300px] right-8 md:right-52 lg:right-60 lg2:right-[600px] text-center">
+          <div className="w-[80%] md:w-[50%] lg:w-[35%] p-5 lg:p-10 bg-black text-white absolute lg:top-1/4 top-3/4 md:top-5px  lg2:top-[300px] right-8 md:right-52 lg:right-60 lg2:right-[300px] text-center">
             <h1 className="uppercase font-extrabold text-[26px] lg:text-[36px] -tracking-[1px]">
               {managementGeneralState.language === 'en' && madeBy.en.headerText}
               {managementGeneralState.language === 'es' && madeBy.es.headerText}
@@ -384,7 +384,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="w-full lg:flex lg:flex-row align-middle items-center gap-16  mt-36 lg:mt-0 my-20 px-8 md:px-16 lg2:px-16">
+      <div className="w-full lg:flex lg:flex-row align-middle items-center gap-16  mt-36 lg:mt-0 my-20 px-8 md:px-16 lg2:px-52">
         <Image
           src={Content2Image}
           className=" h-[35pc] w-[45pc] lg2:h-[50pc]  object-contain object-center"
