@@ -395,6 +395,7 @@ export default function Home() {
   };
 
   const addToCartCustom = async () => {
+    setModalCustom(false);
     setCustomProcess(true);
   };
   useEffect(() => {
@@ -475,6 +476,8 @@ export default function Home() {
     if (colorProductCustom.customValue !== '') {
       customList.push(colorProductCustom);
     }
+
+    console.log(customList, 'o');
 
     addToCart.customList = customList;
 
@@ -3809,7 +3812,7 @@ export default function Home() {
                       {image4List.map((image4, index) => (
                         <div className="relative" key={index}>
                           <IoIosCloseCircle
-                            onClick={() => deleteImage1(index)}
+                            onClick={() => deleteImage4(index)}
                             className="hover:text-red-800 text-[30px] absolute top-0 right-0 cursor-pointer"
                           />
                           <img
