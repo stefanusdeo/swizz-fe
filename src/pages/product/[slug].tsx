@@ -4406,14 +4406,14 @@ export default function Home() {
               {expanded === '' ? (
                 <button
                   onClick={() => addToCartCustom()}
-                  className="z-50 relative h-[63px] flex align-middle justify-center items-center w-full py-3 text-[26px] bg-black text-center text-white"
+                  className="z-50 absolute bottom-2 lg:relative h-[63px] flex align-middle justify-center items-center w-full py-3 text-[26px] bg-black text-center text-white"
                 >
                   Add To Cart
                 </button>
               ) : (
                 <button
                   onClick={() => setExpanded('')}
-                  className="z-50 relative h-[63px] flex align-middle justify-center items-center w-full py-3 text-[30px] bg-black text-center text-white"
+                  className="z-50 absolute bottom-2 lg:relative h-[63px] flex align-middle justify-center items-center w-full py-3 text-[30px] bg-black text-center text-white"
                 >
                   <FaCheck />
                 </button>
