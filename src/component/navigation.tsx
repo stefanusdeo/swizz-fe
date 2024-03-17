@@ -1,22 +1,22 @@
-import { Badge, Drawer, List, ListItem, ListItemText } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Badge, Drawer, List, ListItem, ListItemText } from '@mui/material';
+import { useEffect, useState } from 'react';
 
-import { FaShoppingCart } from "react-icons/fa";
-import { IoMdClose } from "react-icons/io";
-import { FaCheck } from "react-icons/fa";
-import { FiMenu } from "react-icons/fi";
-import { listLanguage } from "@/translation/i18n";
-import useGeneral from "@/stores/hooks/general";
-import { useTranslation } from "react-i18next";
-import useSubCategory from "@/stores/hooks/subCategory";
-import ShinLogo from "@/assets/shinlogo.png";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { listCountry } from "./constant";
-import useOrder from "@/stores/hooks/order";
-import { ICart, ICustom } from "@/stores/types/orderTypes";
-import { NumericFormat } from "react-number-format";
-import Link from "next/link";
+import { FaShoppingCart } from 'react-icons/fa';
+import { IoMdClose } from 'react-icons/io';
+import { FaCheck } from 'react-icons/fa';
+import { FiMenu } from 'react-icons/fi';
+import { listLanguage } from '@/translation/i18n';
+import useGeneral from '@/stores/hooks/general';
+import { useTranslation } from 'react-i18next';
+import useSubCategory from '@/stores/hooks/subCategory';
+import ShinLogo from '@/assets/shinlogo.png';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { listCountry } from './constant';
+import useOrder from '@/stores/hooks/order';
+import { ICart, ICustom } from '@/stores/types/orderTypes';
+import { NumericFormat } from 'react-number-format';
+import Link from 'next/link';
 
 interface ICartSide extends ICart {
   subTotal: number;
@@ -39,12 +39,12 @@ export default function Navigation() {
   const { managementOrderState, handleModifyCartList } = useOrder();
 
   const onChangeLang = (lang: string) => {
-    localStorage.setItem("language", lang);
+    localStorage.setItem('language', lang);
     window.location.reload();
   };
 
   const onChangeCountry = (country: string) => {
-    localStorage.setItem("country", country);
+    localStorage.setItem('country', country);
     window.location.reload();
   };
 
@@ -83,17 +83,17 @@ export default function Navigation() {
     let tempCartSideBar = cartSideBar.map((obj) => ({ ...obj }));
     tempCartSideBar[index].qty = (tempCartSideBar[index].qty ?? 0) + 1;
     let subTotal: number = 0;
-    if (managementGeneralState.country?.currency === "CHF") {
+    if (managementGeneralState.country?.currency === 'CHF') {
       subTotal =
         (tempCartSideBar[index].qty ?? 1) *
         Number(tempCartSideBar[index].product?.price_chf);
     }
-    if (managementGeneralState.country?.currency === "EUR") {
+    if (managementGeneralState.country?.currency === 'EUR') {
       subTotal =
         (tempCartSideBar[index].qty ?? 1) *
         Number(tempCartSideBar[index].product?.price_eur);
     }
-    if (managementGeneralState.country?.currency === "USD") {
+    if (managementGeneralState.country?.currency === 'USD') {
       subTotal =
         (tempCartSideBar[index].qty ?? 1) *
         Number(tempCartSideBar[index].product?.price_dolar);
@@ -107,17 +107,17 @@ export default function Navigation() {
     tempCartSideBar[index].qty = (tempCartSideBar[index].qty ?? 0) - 1;
     if (tempCartSideBar[index].qty ?? 0 > 0) {
       let subTotal: number = 0;
-      if (managementGeneralState.country?.currency === "CHF") {
+      if (managementGeneralState.country?.currency === 'CHF') {
         subTotal =
           (tempCartSideBar[index].qty ?? 1) *
           Number(tempCartSideBar[index].product?.price_chf);
       }
-      if (managementGeneralState.country?.currency === "EUR") {
+      if (managementGeneralState.country?.currency === 'EUR') {
         subTotal =
           (tempCartSideBar[index].qty ?? 1) *
           Number(tempCartSideBar[index].product?.price_eur);
       }
-      if (managementGeneralState.country?.currency === "USD") {
+      if (managementGeneralState.country?.currency === 'USD') {
         subTotal =
           (tempCartSideBar[index].qty ?? 1) *
           Number(tempCartSideBar[index].product?.price_dolar);
@@ -128,8 +128,10 @@ export default function Navigation() {
   };
 
   const onRemove = (index: number) => {
-    let tempCartSideBar = cartSideBar.map((obj) => ({ ...obj }));
-    tempCartSideBar.splice(index, 1);
+    let tempCartSideBar = cartSideBar.filter((obj, i) => i !== index);
+
+    tempCartSideBar.length <= 0 && setGrandTotal(0);
+
     setCartSideBar(tempCartSideBar);
   };
 
@@ -137,17 +139,17 @@ export default function Navigation() {
     let tempCartSideBar = cartSideBar.map((obj) => ({ ...obj }));
     tempCartSideBar[index].qty = qty;
     let subTotal: number = 0;
-    if (managementGeneralState.country?.currency === "CHF") {
+    if (managementGeneralState.country?.currency === 'CHF') {
       subTotal =
         (tempCartSideBar[index].qty ?? 1) *
         Number(tempCartSideBar[index].product?.price_chf);
     }
-    if (managementGeneralState.country?.currency === "EUR") {
+    if (managementGeneralState.country?.currency === 'EUR') {
       subTotal =
         (tempCartSideBar[index].qty ?? 1) *
         Number(tempCartSideBar[index].product?.price_eur);
     }
-    if (managementGeneralState.country?.currency === "USD") {
+    if (managementGeneralState.country?.currency === 'USD') {
       subTotal =
         (tempCartSideBar[index].qty ?? 1) *
         Number(tempCartSideBar[index].product?.price_dolar);
@@ -161,13 +163,13 @@ export default function Navigation() {
     let tempCartSideBar: ICartSide[] = [];
     cartList.map((cart) => {
       let subTotal: number = 0;
-      if (managementGeneralState.country?.currency === "CHF") {
+      if (managementGeneralState.country?.currency === 'CHF') {
         subTotal = (cart.qty ?? 1) * Number(cart.product?.price_chf);
       }
-      if (managementGeneralState.country?.currency === "EUR") {
+      if (managementGeneralState.country?.currency === 'EUR') {
         subTotal = (cart.qty ?? 1) * Number(cart.product?.price_eur);
       }
-      if (managementGeneralState.country?.currency === "USD") {
+      if (managementGeneralState.country?.currency === 'USD') {
         subTotal = (cart.qty ?? 1) * Number(cart.product?.price_dolar);
       }
       let ObjCart: ICartSide = {
@@ -184,11 +186,11 @@ export default function Navigation() {
 
   const customDetail = (cart: ICartSide) => {
     let collectComp: React.ReactNode[] = [];
-    let prefix: string = "";
+    let prefix: string = '';
     cart.customList?.map((x: ICustom) => {
       if (
-        x.customProperty.includes("ight") ||
-        x.customProperty.includes("eft")
+        x.customProperty.includes('ight') ||
+        x.customProperty.includes('eft')
       ) {
         collectComp.push(
           <div className="limited-lines">
@@ -200,7 +202,7 @@ export default function Navigation() {
       } else {
         collectComp.push(
           <div className="limited-lines">
-            {prefix !== "" ? `${prefix} - ` : ""}
+            {prefix !== '' ? `${prefix} - ` : ''}
             {x.customProperty} : {x.customValue}
             <br />
           </div>
@@ -232,12 +234,12 @@ export default function Navigation() {
             ))}
           </div>
           <Link
-            href={"/"}
+            href={'/'}
             className="m-auto flex align-middle items-center lg2:w-2/12"
           >
             <Image
               src={ShinLogo}
-              alt={"logo"}
+              alt={'logo'}
               className="cursor-pointer w-[100px] h-[100px] mx-auto"
             />
           </Link>
@@ -291,10 +293,10 @@ export default function Navigation() {
             </div>
 
             <div
-              onClick={() => router.push("/contact-us")}
+              onClick={() => router.push('/contact-us')}
               className="hidden lg2:block cursor-pointer pb-1 text-white text-[16px] hover:border-b hover:border-solid hover:border-white"
             >
-              {t("contact")}
+              {t('contact')}
             </div>
             <Badge
               badgeContent={managementOrderState.cartList?.length ?? 0}
@@ -311,7 +313,7 @@ export default function Navigation() {
         </div>
       </div>
       <Drawer
-        anchor={"left"}
+        anchor={'left'}
         open={menu}
         onClose={() => setMenu(false)}
         className="drawer cursor-pointer"
@@ -366,7 +368,7 @@ export default function Navigation() {
         </div>
       </Drawer>
       <Drawer
-        anchor={"bottom"}
+        anchor={'bottom'}
         open={openCountry}
         onClose={() => setOpenCountry(!openCountry)}
         className="text-center"
@@ -391,7 +393,7 @@ export default function Navigation() {
         </List>
       </Drawer>
       <Drawer
-        anchor={"bottom"}
+        anchor={'bottom'}
         open={openLanguage}
         onClose={() => setOpenLanguage(!openLanguage)}
       >
@@ -422,11 +424,11 @@ export default function Navigation() {
         </ul>
       </Drawer>
       <Drawer
-        anchor={"right"}
+        anchor={'right'}
         open={openCart}
         onClose={() => setOpenCart(false)}
       >
-        <div className="w-[50vw] h-full relative ">
+        <div className="w-[80vw] md:w-[50vw] lg:w-[35vw] lg2:w-[25vw] h-full relative ">
           <div className="sticky top-0 flex justify-between align-middle items-center border-b border-solid border-black px-6 py-5 bg-white z-10">
             <div className="flex align-middle items-center gap-4">
               <FaShoppingCart className="w-6 h-6" />
@@ -455,7 +457,7 @@ export default function Navigation() {
                       <NumericFormat
                         displayType="text"
                         value={cart.subTotal}
-                        thousandSeparator={","}
+                        thousandSeparator={','}
                         decimalSeparator="."
                         suffix={` ${managementGeneralState.country?.currencyLogo}`}
                       />
@@ -505,16 +507,16 @@ export default function Navigation() {
 
           <div className="w-full px-6 py-5 sticky bottom-0 bg-white">
             <button
-              onClick={() => router.push("/checkout")}
+              onClick={() => router.push('/checkout')}
               className="w-full text-center py-4 bg-[#ffce07] font-bold tracking-[1.5px] text-[24px]"
             >
-              {`${t("checkout")} -`}{" "}
+              {`${t('checkout')} -`}{' '}
               <span className="text-[22px]">
-                {" "}
+                {' '}
                 <NumericFormat
                   displayType="text"
                   value={grandTotal}
-                  thousandSeparator={","}
+                  thousandSeparator={','}
                   decimalSeparator="."
                   suffix={` ${managementGeneralState.country?.currencyLogo}`}
                 />

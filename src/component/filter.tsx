@@ -7,6 +7,7 @@ import {
 } from '@mui/material';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
+import useGeneral from '@/stores/hooks/general';
 
 const FilterList = ({
   name,
@@ -102,6 +103,8 @@ export const PriceRange = ({
   handleChangeRange: any;
   priceRange: Array<number>;
 }) => {
+  const { managementGeneralState } = useGeneral();
+
   function valuetext(value: number) {
     return `${value}`;
   }
@@ -122,12 +125,12 @@ export const PriceRange = ({
         />
         <div className="flex text-[18px]  w-full items-center justify-between my-5 gap-3">
           <div className=" border-2 w-[90px] p-2 flex justify-between">
-            <div>CHF</div>
+            <div>{managementGeneralState.country?.currency}</div>
             <div>{priceRange[0]}</div>
           </div>
           <p>to</p>
           <div className=" border-2 w-[90px] p-2 flex justify-between">
-            <div>CHF</div>
+            <div>{managementGeneralState.country?.currency}</div>
             <div>{priceRange[1]}</div>
           </div>
         </div>
