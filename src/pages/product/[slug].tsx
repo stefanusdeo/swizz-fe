@@ -3229,7 +3229,7 @@ export default function Home() {
     <Fragment>
       <div className="">
         <Navigation />
-        <div className="pt-[135px] w-full h-full px-8 lg2:px-16">
+        <div className="pt-[100px] lg:pt-[135px] w-full h-full px-8 lg2:px-16">
           <div className="mt-16">
             {managementSubCategoryState.subCategory?.name}/
             {managementProductState.productDetail?.is_custom === 0
@@ -3239,21 +3239,15 @@ export default function Home() {
 
           <div className="flex flex-col lg:flex-row justify-between items-start align-top gap-16 py-16">
             <div className="w-full lg:w-1/2">
-              <div className="w-full h-[50vh] lg:h-[25vw] lg2:h-[26vw] ">
+              <div className="w-full h-[30vh] md:h-[49vw] lg:h-[25vw] lg2:h-[26vw] ">
                 <ImageMagnifier
                   magnifieWidth={300}
                   magnifierHeight={300}
-                  // width={"200px"}
                   src={imageSource.imageBase64}
-                  className="h-full w-full cursor-zoom-in object-contain object-center"
+                  className="h-[50vw] w-full  lg:h-[300px] lg:w-[500px]  cursor-zoom-in object-contain object-center"
                 />
-                {/* <img
-                  src={imageSource.imageBase64}
-                  alt="image-product"
-                  className="h-full w-full  object-contain object-center"
-                /> */}
               </div>
-              <div className="inline-flex w-full gap-4 align-middle items-center mt-5 pb-5">
+              <div className="inline-flex w-full gap-4 align-middle items-center mt-5 lg:pb-5">
                 {(managementProductState.productDetail?.productImage ?? []).map(
                   (prodImage: IProductImage) => (
                     <div
@@ -3275,10 +3269,10 @@ export default function Home() {
               </div>
             </div>
             <div className="w-full lg:w-1/2">
-              <h1 className="mt-10 lg:mt-0 text-[32px] font-bold mb-3">
+              <h1 className="-mt-10  lg:mt-0 text-[20px] lg:text-[32px] font-bold mb-3">
                 {managementProductState.productDetail?.name}
               </h1>
-              <h2 className="text-[38px] font-bold mb-5">
+              <h2 className=" text-[20px] lg:text-[38px] font-bold mb-5">
                 {managementGeneralState.country?.currency === 'EUR' && (
                   <NumericFormat
                     displayType="text"
@@ -3312,7 +3306,7 @@ export default function Home() {
                   <button
                     key={item.size}
                     onClick={() => setSizeProduct(item.size)}
-                    className={`text-center text-lg font-medium py-4 px-5 border border-solid border-black rounded-lg ${
+                    className={`text-center text-sm  lg:text-lg lg:font-medium py-2 px-3 lg:px-4 border border-solid border-black rounded-lg ${
                       sizeProduct === item.size ? 'bg-black text-[#b2edbd]' : ''
                     }`}
                   >
