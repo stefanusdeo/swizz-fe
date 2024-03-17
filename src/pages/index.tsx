@@ -300,11 +300,12 @@ export default function Home() {
                 />
               )}
             </h3>
+
             <Link
               href={`/product/${productHome?.slug}`}
               className="bg-[#f5dc00] font-bold text-[16px] w-full text-center py-3 mt-5 inline-block"
             >
-              GO TO CUSTOMIZE
+              {productHome?.is_custom === 1 ? 'GO TO CUSTOMIZE' : 'GO TO CHART'}
             </Link>
           </div>
         </div>
