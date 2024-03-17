@@ -52,6 +52,7 @@ import { ICart, ICustom } from '@/stores/types/orderTypes';
 import localforage from 'localforage';
 import useOrder from '@/stores/hooks/order';
 import html2canvas from 'html2canvas';
+import ImageMagnifier from '@/component/ImageMagnifier';
 
 interface IImageProp {
   width: number;
@@ -3238,12 +3239,19 @@ export default function Home() {
 
           <div className="flex flex-col lg:flex-row justify-between items-start align-top gap-16 py-16">
             <div className="w-full lg:w-1/2">
-              <div className="w-full h-[50vh] lg:h-[40vw]">
-                <img
+              <div className="w-full h-[50vh] lg:h-[25vw] lg2:h-[26vw] ">
+                <ImageMagnifier
+                  magnifieWidth={300}
+                  magnifierHeight={300}
+                  // width={"200px"}
+                  src={imageSource.imageBase64}
+                  className="h-full w-full cursor-zoom-in object-contain object-center"
+                />
+                {/* <img
                   src={imageSource.imageBase64}
                   alt="image-product"
-                  className="h-full w-full object-contain object-center"
-                />
+                  className="h-full w-full  object-contain object-center"
+                /> */}
               </div>
               <div className="inline-flex w-full gap-4 align-middle items-center mt-5 pb-5">
                 {(managementProductState.productDetail?.productImage ?? []).map(
@@ -3259,7 +3267,7 @@ export default function Home() {
                       <img
                         src={prodImage.imageBase64}
                         alt="image-product"
-                        className="max-w-none w-[100px] h-[100px] object-cover object-center"
+                        className="max-w-none w-[50px] h-[50px] object-cover object-center"
                       />
                     </div>
                   )
