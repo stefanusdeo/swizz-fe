@@ -1,21 +1,21 @@
-import Foooter from "@/component/footer";
-import Navigation from "@/component/navigation";
-import useSubCategory from "@/stores/hooks/subCategory";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import BlockUi from "react-block-ui";
+import Foooter from '@/component/footer';
+import Navigation from '@/component/navigation';
+import useSubCategory from '@/stores/hooks/subCategory';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import BlockUi from 'react-block-ui';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [slugSub, setSlugSub] = useState<string>("");
+  const [slugSub, setSlugSub] = useState<string>('');
   const router = useRouter();
   const { managementSubCategoryState, handleGetSubCategoryDetail } =
     useSubCategory();
 
   useEffect(() => {
     let query = router.query;
-    let subSlug = query["subcategory"];
+    let subSlug = query['subcategory'];
     if (subSlug) {
       setSlugSub(subSlug?.toString());
       handleGetSubCategoryDetail(subSlug?.toString())
@@ -28,14 +28,14 @@ export default function Home() {
                 router.push(`/collection/${subSlug}/classic`);
               }
             } else {
-              router.push("/404");
+              router.push('/404');
             }
           } else {
-            router.push("/404");
+            router.push('/404');
           }
         })
         .catch((e) => {
-          router.push("/404");
+          router.push('/404');
         });
     }
   }, [router]);
@@ -48,7 +48,7 @@ export default function Home() {
       loader={<div className="spinner"></div>}
     >
       <Navigation />
-      <div className="pt-[135px] w-full h-full">
+      <div className="pt-[135px] h-[100vh] w-full flex items-center justify-center">
         <div className="py-14 flex items-start align-top justify-center gap-10 lg:gap-20 ">
           <div
             onClick={() => router.push(`/collection/${slugSub}/classic`)}
@@ -84,7 +84,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
       <Foooter />
     </BlockUi>
   );
