@@ -32,7 +32,10 @@ const FilterList = ({
 
   return (
     <div>
-      <div className="flex justify-between items-center" onClick={handleSelect}>
+      <div
+        className="flex cursor-pointer justify-between items-center"
+        onClick={handleSelect}
+      >
         <h3 className="cursor-pointer">{name}</h3>
         <div className="cursor-pointer">
           {filterSelect.val.includes(id) ? <ExpandLess /> : <ExpandMore />}
@@ -111,13 +114,15 @@ export const PriceRange = ({
 
   return (
     <FilterList filterSelect={filterSelect} name="Price" id={2}>
-      <div className="flex flex-col px-2 justify-start">
+      <div className="flex  flex-col px-2 justify-start">
         <Slider
           getAriaLabel={() => 'Price range'}
           value={priceRange}
           sx={{
             color: 'black',
           }}
+          min={10}
+          max={20}
           size="medium"
           onChange={handleChangeRange}
           valueLabelDisplay="auto"
@@ -152,7 +157,7 @@ const Filter = ({
   priceRange: Array<number>;
 }) => {
   return (
-    <div className="  hidden md:flex lg:flex lg2:flex w-[33%] md:w-[50%] lg:w-[32%] lg2:w-[28%] text-[25px] p-4 px-10  flex-col gap-3">
+    <div className="r  hidden md:flex lg:flex lg2:flex w-[33%] md:w-[50%] lg:w-[32%] lg2:w-[28%] text-[25px] p-4 px-10  flex-col gap-3">
       <b>FILTERS</b>
       <hr />
       <Availability filterSelect={filterSelect} />
