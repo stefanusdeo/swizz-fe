@@ -243,7 +243,7 @@ export default function Home() {
               <img
                 src={imageSource.imageBase64}
                 alt="Front of men&#039;s Basic Tee in black."
-                className="h-full w-full bg-gray-300  p-20 max-w-none object-contain object-center"
+                className="h-full w-full  max-w-none object-contain object-center"
               />
             </div>
             <div className="inline-flex w-full gap-4 align-middle items-center mt-5">

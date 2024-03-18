@@ -221,11 +221,11 @@ export default function Home() {
                   key={prod.id}
                   className="cursor-pointer "
                 >
-                  <div className="w-full h-[30vw] lg:h-[19vw] md:h-[14vh]">
+                  <div className=" h-full ">
                     <img
                       src={prod.main_img}
                       alt={prod.name}
-                      className={`h-[90%] hover:p-5 w-full bg-gray-300 px-5 md:px-6 lg:px-10 lg2:px-10  object-contain object-center`}
+                      className={`h-[90%] p-7 hover:p-5 w-full  object-contain object-center`}
                     />
                   </div>
                   <div className="text-center lg:-mt-4 text-[17px]  font-bold">
