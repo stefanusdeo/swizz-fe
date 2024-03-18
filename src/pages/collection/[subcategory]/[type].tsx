@@ -5,12 +5,18 @@ import { useProduct } from '@/stores/hooks/product';
 import useSubCategory from '@/stores/hooks/subCategory';
 import {
   Checkbox,
+  ClickAwayListener,
   Collapse,
   FormControlLabel,
   FormGroup,
   Slider,
+  Tooltip,
+  TooltipProps,
+  styled,
+  tooltipClasses,
 } from '@mui/material';
-import Image from 'next/image';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useEffect, useState } from 'react';
@@ -18,14 +24,23 @@ import BlockUi from 'react-block-ui';
 import { NumericFormat } from 'react-number-format';
 import Filter from '@/component/filter';
 import NavProduct from '@/component/navProduct';
+import DoneIcon from '@mui/icons-material/Done';
+interface SortingRule {
+  id: number;
+  name: string;
+  sortBy: 'name' | 'created_at' | 'price';
+  sortOrder: 'asc' | 'desc';
+}
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isValidSlug, setIsValidSlug] = useState<boolean>(false);
   const [isCustom, setIsCustom] = useState<number>(0);
   const [slugSub, setSlugSub] = useState<string>('');
-  const [priceRange, setPriceRange] = React.useState<number[]>([0, 100]);
+  const [priceRange, setPriceRange] = React.useState<number[]>([0, 20]);
   const [filterSelect, setfilterSelect] = React.useState<number[]>([0]);
+  const [shotBy, setshotBy] = useState<SortingRule>();
+  const [openTooltip, setTooltip] = useState(false);
 
   const handleChangeRange = (event: Event, newValue: number | number[]) => {
     setPriceRange(newValue as number[]);
@@ -76,6 +91,39 @@ export default function Home() {
     }
   }, [router]);
 
+  const LightTooltip = styled(({ className, ...props }: TooltipProps) => (
+    <Tooltip {...props} classes={{ popper: className }} />
+  ))(({ theme }) => ({
+    [`& .${tooltipClasses.arrow}`]: {
+      color: theme.palette.common.white,
+      '&::before': {
+        backgroundColor: theme.palette.common.white,
+        border: '1px solid #999',
+      },
+    },
+
+    [`& .${tooltipClasses.tooltip}`]: {
+      backgroundColor: theme.palette.common.white,
+      color: 'rgba(0, 0, 0, 0.87)',
+      fontSize: 11,
+      border: '1px solid #999',
+    },
+  }));
+
+  const shoryArray: Array<SortingRule> = [
+    { id: 1, name: 'Alphabetically, A-Z', sortBy: 'name', sortOrder: 'asc' },
+    { id: 2, name: 'Alphabetically, Z-A', sortBy: 'name', sortOrder: 'desc' },
+    { id: 3, name: 'Date, old to new', sortBy: 'created_at', sortOrder: 'asc' },
+    {
+      id: 4,
+      name: 'Date, new to old',
+      sortBy: 'created_at',
+      sortOrder: 'desc',
+    },
+    { id: 5, name: 'Price, low to high', sortBy: 'price', sortOrder: 'asc' },
+    { id: 6, name: 'Price, high to low', sortBy: 'price', sortOrder: 'desc' },
+  ];
+
   return (
     <BlockUi
       tag="div"
@@ -106,7 +154,60 @@ export default function Home() {
           <div className=" w-[95%] lg:px-10">
             <div className=" hidden lg:flex md:flex lg2:flex text-[18px] justify-between py-4">
               <div>{managementProductState.productList?.length} products</div>
-              <div>Sort By</div>
+              <div className="flex items-center gap-2">
+                <div>Sort by</div>
+                <ClickAwayListener onClickAway={() => setTooltip(false)}>
+                  <div>
+                    <LightTooltip
+                      PopperProps={{
+                        disablePortal: true,
+                      }}
+                      onClose={() => setTooltip(false)}
+                      open={openTooltip}
+                      disableFocusListener
+                      disableHoverListener
+                      disableTouchListener
+                      placement="bottom-start"
+                      title={
+                        <div className="px-3 py-4 flex flex-col gap-2 text-[17px]">
+                          {shoryArray.map((e: SortingRule) => {
+                            return (
+                              <div className="flex gap-2">
+                                <div
+                                  className={`${
+                                    shotBy?.id === e.id && 'font-bold'
+                                  } cursor-pointer `}
+                                  onClick={() => {
+                                    setTooltip(false);
+                                    setshotBy(e);
+                                  }}
+                                >
+                                  {e.name}
+                                </div>
+                                {shotBy?.id === e.id && (
+                                  <DoneIcon
+                                    className="text-black font-bold"
+                                    fontSize="small"
+                                  />
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      }
+                      arrow
+                    >
+                      <div
+                        className="cursor-pointer flex items-center"
+                        onClick={() => setTooltip(!openTooltip)}
+                      >
+                        <b>{shotBy?.name}</b>
+                        {!openTooltip ? <ExpandMore /> : <ExpandLess />}
+                      </div>
+                    </LightTooltip>
+                  </div>
+                </ClickAwayListener>
+              </div>
             </div>
 
             <div className="md:hidden lg:hidden lg2:hidden text-center my-3">

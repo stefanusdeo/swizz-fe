@@ -22,7 +22,7 @@ interface ICartSide extends ICart {
   subTotal: number;
 }
 
-export default function Navigation() {
+export default function Navigation({ checkout }: { checkout?: boolean }) {
   const { t } = useTranslation();
   const [openCart, setOpenCart] = useState<boolean>(false);
   const [menu, setMenu] = useState<boolean>(false);
@@ -222,16 +222,17 @@ export default function Navigation() {
             >
               <FiMenu className="w-6 h-6" color="white" />
             </div>
-            {(managementSubCategoryState.subCategoryList ?? []).map((sub) => (
-              <div
-                key={sub.id}
-                onClick={() => router.push(`/collection/${sub.slug}`)}
-                className="uppercase hidden lg2:block cursor-pointer pb-1 text-white text-[16px] hover:border-b hover:border-solid hover:border-white"
-              >
-                {/* SHIN<span className="text-[#b2edbd]">GUARD</span> */}
-                {sub.name}
-              </div>
-            ))}
+            {!checkout &&
+              (managementSubCategoryState.subCategoryList ?? []).map((sub) => (
+                <div
+                  key={sub.id}
+                  onClick={() => router.push(`/collection/${sub.slug}`)}
+                  className="uppercase hidden lg2:block cursor-pointer pb-1 text-white text-[16px] hover:border-b hover:border-solid hover:border-white"
+                >
+                  {/* SHIN<span className="text-[#b2edbd]">GUARD</span> */}
+                  {sub.name}
+                </div>
+              ))}
           </div>
           <Link
             href={'/'}
@@ -298,17 +299,19 @@ export default function Navigation() {
             >
               {t('contact')}
             </div>
-            <Badge
-              badgeContent={managementOrderState.cartList?.length ?? 0}
-              color="primary"
-              onClick={() => setOpenCart(!openCart)}
-            >
-              <div className="hidden lg:block cursor-pointer pb-1 text-white text-[16px] hover:border-b hover:border-solid hover:border-white">
-                Cart
-              </div>
+            {!checkout && (
+              <Badge
+                badgeContent={managementOrderState.cartList?.length ?? 0}
+                color="primary"
+                onClick={() => setOpenCart(!openCart)}
+              >
+                <div className="hidden lg:block cursor-pointer pb-1 text-white text-[16px] hover:border-b hover:border-solid hover:border-white">
+                  Cart
+                </div>
 
-              <FaShoppingCart className="lg:hidden cursor-default w-6 h-6 text-white" />
-            </Badge>
+                <FaShoppingCart className="lg:hidden cursor-default w-6 h-6 text-white" />
+              </Badge>
+            )}
           </div>
         </div>
       </div>

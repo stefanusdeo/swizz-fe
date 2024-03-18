@@ -3242,12 +3242,12 @@ export default function Home() {
 
           <div className="flex flex-col lg:flex-row justify-between items-start align-top gap-16 py-16">
             <div className="w-full lg:w-1/2">
-              <div className="w-full h-[30vh] md:h-[49vw] lg:h-[25vw] lg2:h-[26vw] ">
+              <div className="w-full h-[30vh] md:h-[49vw] lg:h-[25vw] lg2:h-[21vw] ">
                 <ImageMagnifier
                   magnifieWidth={300}
                   magnifierHeight={300}
                   src={imageSource.imageBase64}
-                  className="h-[50vw] w-full  lg:h-[300px] lg:w-[500px]  cursor-zoom-in object-contain object-center"
+                  className="h-[50vw] w-full  lg:h-[300px] lg2:w-[800px] lg2:h-[400px] lg:w-[500px]  cursor-zoom-in object-contain object-center"
                 />
               </div>
               <div className="inline-flex w-full gap-4 align-middle items-center mt-5 lg:pb-5">
