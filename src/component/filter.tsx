@@ -98,6 +98,8 @@ export const PriceRange = ({
   filterSelect,
   priceRange,
   handleChangeRange,
+  handleCommitRange,
+  mobile,
 }: {
   filterSelect: {
     val: Array<number>;
@@ -105,6 +107,8 @@ export const PriceRange = ({
   };
   handleChangeRange: any;
   priceRange: Array<number>;
+  handleCommitRange: any;
+  mobile?: boolean;
 }) => {
   const { managementGeneralState } = useGeneral();
 
@@ -121,10 +125,11 @@ export const PriceRange = ({
           sx={{
             color: 'black',
           }}
-          min={10}
-          max={20}
+          // min={10}
+          // max={20}
           size="medium"
           onChange={handleChangeRange}
+          onChangeCommitted={!mobile && handleCommitRange}
           valueLabelDisplay="auto"
           getAriaValueText={valuetext}
         />
@@ -147,6 +152,7 @@ export const PriceRange = ({
 const Filter = ({
   filterSelect,
   handleChangeRange,
+  handleCommitRange,
   priceRange,
 }: {
   filterSelect: {
@@ -154,6 +160,7 @@ const Filter = ({
     set: React.Dispatch<React.SetStateAction<number[]>>;
   };
   handleChangeRange: any;
+  handleCommitRange: any;
   priceRange: Array<number>;
 }) => {
   return (
@@ -162,7 +169,9 @@ const Filter = ({
       <hr />
       <Availability filterSelect={filterSelect} />
       <hr />
-      <PriceRange {...{ filterSelect, handleChangeRange, priceRange }} />
+      <PriceRange
+        {...{ filterSelect, handleChangeRange, priceRange, handleCommitRange }}
+      />
     </div>
   );
 };
