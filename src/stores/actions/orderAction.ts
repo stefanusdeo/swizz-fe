@@ -123,7 +123,6 @@ export const addCartList =
         newCart.push(newProduct);
       }
       await localforage.setItem('cart', newCart);
-      console.log(newCart, 'ini');
       const respSetOrder: ICallbackOrder = {
         code: 200,
         message: 'Success Init Cart',

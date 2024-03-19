@@ -132,8 +132,6 @@ export default function checkout() {
     return collectComp;
   };
 
-  console.log(managementGeneralState);
-
   useEffect(() => {
     let cartList: ICart[] = managementOrderState.cartList ?? [];
     let tempCartSideBar: ICartSide[] = [];

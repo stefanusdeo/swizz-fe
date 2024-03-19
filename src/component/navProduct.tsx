@@ -15,6 +15,11 @@ const NavProduct = ({
   filterSelect,
   handleChangeRange,
   priceRange,
+  handleCommitRange,
+  shoryArray,
+  shotBy,
+  setshotBy,
+  handleSubmitFilter,
 }: {
   filterSelect: {
     val: Array<number>;
@@ -22,28 +27,18 @@ const NavProduct = ({
   };
   handleChangeRange: any;
   priceRange: Array<number>;
+  handleCommitRange: any;
+  shoryArray: any;
+  shotBy: any;
+  setshotBy: any;
+  handleSubmitFilter: any;
 }) => {
   const [open, setOpen] = React.useState(false);
   const [openSort, setOpenSort] = React.useState(false);
-  const [shotBy, setshotBy] = React.useState<SortingRule>();
 
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
   };
-
-  const shoryArray: Array<SortingRule> = [
-    { id: 1, name: 'Alphabetically, A-Z', sortBy: 'name', sortOrder: 'asc' },
-    { id: 2, name: 'Alphabetically, Z-A', sortBy: 'name', sortOrder: 'desc' },
-    { id: 3, name: 'Date, old to new', sortBy: 'created_at', sortOrder: 'asc' },
-    {
-      id: 4,
-      name: 'Date, new to old',
-      sortBy: 'created_at',
-      sortOrder: 'desc',
-    },
-    { id: 5, name: 'Price, low to high', sortBy: 'price', sortOrder: 'asc' },
-    { id: 6, name: 'Price, high to low', sortBy: 'price', sortOrder: 'desc' },
-  ];
 
   return (
     <>
@@ -60,7 +55,15 @@ const NavProduct = ({
 
             <Availability {...{ filterSelect }} />
             <hr />
-            <PriceRange {...{ filterSelect, handleChangeRange, priceRange }} />
+            <PriceRange
+              {...{
+                filterSelect,
+                handleChangeRange,
+                priceRange,
+                handleCommitRange,
+              }}
+              mobile={true}
+            />
           </div>
           <div className="bottom-0  px-4">
             <Button
@@ -70,6 +73,10 @@ const NavProduct = ({
                 '&:hover': {
                   backgroundColor: '#cfbd1b',
                 },
+              }}
+              onClick={() => {
+                handleSubmitFilter();
+                setOpen(false);
               }}
               fullWidth
               variant="contained"
@@ -95,7 +102,7 @@ const NavProduct = ({
           </div>
           <hr />
 
-          {shoryArray.map((e) => {
+          {shoryArray.map((e: SortingRule) => {
             return (
               <>
                 <div

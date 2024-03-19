@@ -37,13 +37,34 @@ export default function Home() {
   const [isValidSlug, setIsValidSlug] = useState<boolean>(false);
   const [isCustom, setIsCustom] = useState<number>(0);
   const [slugSub, setSlugSub] = useState<string>('');
-  const [priceRange, setPriceRange] = React.useState<number[]>([0, 20]);
-  const [filterSelect, setfilterSelect] = React.useState<number[]>([0]);
+  const [priceRange, setPriceRange] = React.useState<number[]>([0, 0]);
+  const [priceRangeCommit, setPriceRangeCommit] = React.useState<number[]>([
+    0, 0,
+  ]);
+  const [filterSelect, setfilterSelect] = React.useState<number[]>([1]);
   const [shotBy, setshotBy] = useState<SortingRule>();
   const [openTooltip, setTooltip] = useState(false);
 
+  const shoryArray: Array<SortingRule> = [
+    { id: 1, name: 'Alphabetically, A-Z', sortBy: 'name', sortOrder: 'asc' },
+    { id: 2, name: 'Alphabetically, Z-A', sortBy: 'name', sortOrder: 'desc' },
+    { id: 3, name: 'Date, old to new', sortBy: 'created_at', sortOrder: 'asc' },
+    {
+      id: 4,
+      name: 'Date, new to old',
+      sortBy: 'created_at',
+      sortOrder: 'desc',
+    },
+    { id: 5, name: 'Price, low to high', sortBy: 'price', sortOrder: 'asc' },
+    { id: 6, name: 'Price, high to low', sortBy: 'price', sortOrder: 'desc' },
+  ];
+
   const handleChangeRange = (event: Event, newValue: number | number[]) => {
     setPriceRange(newValue as number[]);
+  };
+
+  const handleCommitRange = (event: Event, newValue: number | number[]) => {
+    setPriceRangeCommit(newValue as number[]);
   };
 
   const router = useRouter();
@@ -55,13 +76,30 @@ export default function Home() {
 
   const { managementProductState, handleGetProductList } = useProduct();
 
+  const handleSubmitFilter = () => {
+    handleGetProductList({
+      slugSub,
+      isCustom,
+      sortBy: shotBy?.sortBy,
+      sortOrder: shotBy?.sortOrder,
+      maxPrice: priceRange[1],
+      minPrice: priceRange[0],
+      currency: managementGeneralState.country?.currency,
+    }).then((res: any) => {
+      setIsLoading(false);
+    });
+  };
+
   useEffect(() => {
     if (isValidSlug === true) {
-      handleGetProductList(slugSub, isCustom).then((res) => {
-        setIsLoading(false);
-      });
+      handleSubmitFilter();
     }
-  }, [isValidSlug]);
+  }, [
+    isValidSlug,
+    shotBy,
+    priceRangeCommit,
+    managementGeneralState?.country?.currency,
+  ]);
 
   useEffect(() => {
     let query = router.query;
@@ -78,7 +116,7 @@ export default function Home() {
       }
       setSlugSub(subSlug?.toString());
       handleGetSubCategoryDetail(subSlug?.toString())
-        .then((res) => {
+        .then((res: any) => {
           if (res.code === 200) {
             setIsValidSlug(true);
           } else {
@@ -110,20 +148,6 @@ export default function Home() {
     },
   }));
 
-  const shoryArray: Array<SortingRule> = [
-    { id: 1, name: 'Alphabetically, A-Z', sortBy: 'name', sortOrder: 'asc' },
-    { id: 2, name: 'Alphabetically, Z-A', sortBy: 'name', sortOrder: 'desc' },
-    { id: 3, name: 'Date, old to new', sortBy: 'created_at', sortOrder: 'asc' },
-    {
-      id: 4,
-      name: 'Date, new to old',
-      sortBy: 'created_at',
-      sortOrder: 'desc',
-    },
-    { id: 5, name: 'Price, low to high', sortBy: 'price', sortOrder: 'asc' },
-    { id: 6, name: 'Price, high to low', sortBy: 'price', sortOrder: 'desc' },
-  ];
-
   return (
     <BlockUi
       tag="div"
@@ -137,6 +161,8 @@ export default function Home() {
         filterSelect={{ val: filterSelect, set: setfilterSelect }}
         handleChangeRange={handleChangeRange}
         priceRange={priceRange}
+        handleCommitRange={handleCommitRange}
+        {...{ setshotBy, shoryArray, shotBy, handleSubmitFilter }}
       />
       <div className="pt-[135px] w-full h-[100vh] px-8 lg2:px-16 content-layer">
         <div className="mt-16 uppercase font-bold text-xl">
@@ -148,6 +174,7 @@ export default function Home() {
           <Filter
             filterSelect={{ val: filterSelect, set: setfilterSelect }}
             handleChangeRange={handleChangeRange}
+            handleCommitRange={handleCommitRange}
             priceRange={priceRange}
           />
 
