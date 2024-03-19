@@ -1,28 +1,28 @@
-import { listCountry } from "@/component/constant";
-import Foooter from "@/component/footer";
-import Navigation from "@/component/navigation";
+import { listCountry } from '@/component/constant';
+import Foooter from '@/component/footer';
+import Navigation from '@/component/navigation';
 import {
   MenuItem,
   OutlinedInputProps,
   TextField,
   TextFieldProps,
-} from "@mui/material";
-import { styled } from "@mui/material/styles";
-import * as Yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+} from '@mui/material';
+import { styled } from '@mui/material/styles';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
 import {
   ICheckoutOrder,
   IFormCheckout,
   IProductCheckoout,
   ICart,
-} from "@/stores/types/orderTypes";
-import useGeneral from "@/stores/hooks/general";
-import useOrder from "@/stores/hooks/order";
-import useSubCategory from "@/stores/hooks/subCategory";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+} from '@/stores/types/orderTypes';
+import useGeneral from '@/stores/hooks/general';
+import useOrder from '@/stores/hooks/order';
+import useSubCategory from '@/stores/hooks/subCategory';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface ICartSide extends ICart {
   subTotal: number;
@@ -47,40 +47,40 @@ const RedditTextField = styled((props: any) => {
     />
   );
 })(({ theme, error }) => ({
-  "& .MuiFilledInput-root": {
-    overflow: "hidden",
+  '& .MuiFilledInput-root': {
+    overflow: 'hidden',
     borderRadius: 4,
-    backgroundColor: "#F3F6F9",
-    border: "1px solid",
-    borderColor: error ? "#d32f2f" : "#E0E3E7",
+    backgroundColor: '#F3F6F9',
+    border: '1px solid',
+    borderColor: error ? '#d32f2f' : '#E0E3E7',
     transition: theme.transitions.create([
-      "border-color",
-      "background-color",
-      "box-shadow",
+      'border-color',
+      'background-color',
+      'box-shadow',
     ]),
-    "&:hover": {
-      backgroundColor: "transparent",
+    '&:hover': {
+      backgroundColor: 'transparent',
     },
-    "&.Mui-focused": {
-      backgroundColor: "transparent",
-      borderColor: error ? "#d32f2f" : "#000",
+    '&.Mui-focused': {
+      backgroundColor: 'transparent',
+      borderColor: error ? '#d32f2f' : '#000',
     },
   },
-  "& .MuiInputLabel-root": {
-    "&.Mui-focused": {
-      color: error ? "#d32f2f" : "#000",
+  '& .MuiInputLabel-root': {
+    '&.Mui-focused': {
+      color: error ? '#d32f2f' : '#000',
     },
   },
 }));
 
 const formCheckoutDefault: IFormCheckout = {
-  email: "",
-  country: "",
-  name: "",
-  address: "",
-  postal_code: "",
-  phone: "",
-  city: "",
+  email: '',
+  country: '',
+  name: '',
+  address: '',
+  postal_code: '',
+  phone: '',
+  city: '',
 };
 
 export default function checkout() {
@@ -98,13 +98,13 @@ export default function checkout() {
     let tempCartSideBar: ICartSide[] = [];
     cartList.map((cart) => {
       let subTotal: number = 0;
-      if (managementGeneralState.country?.currency === "CHF") {
+      if (managementGeneralState.country?.currency === 'CHF') {
         subTotal = (cart.qty ?? 1) * Number(cart.product?.price_chf);
       }
-      if (managementGeneralState.country?.currency === "EUR") {
+      if (managementGeneralState.country?.currency === 'EUR') {
         subTotal = (cart.qty ?? 1) * Number(cart.product?.price_eur);
       }
-      if (managementGeneralState.country?.currency === "USD") {
+      if (managementGeneralState.country?.currency === 'USD') {
         subTotal = (cart.qty ?? 1) * Number(cart.product?.price_dolar);
       }
       let ObjCart: ICartSide = {
@@ -117,15 +117,15 @@ export default function checkout() {
   }, [managementOrderState.cartList]);
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("Name is required."),
+    name: Yup.string().required('Name is required.'),
     email: Yup.string()
-      .required("Email is required.")
-      .email("Invalid Email Format"),
-    country: Yup.string().required("Country is required."),
-    address: Yup.string().required("Address is required."),
-    postal_code: Yup.string().required("Postal Code is required."),
-    phone: Yup.string().required("Phone Code is required."),
-    city: Yup.string().required("City Code is required."),
+      .required('Email is required.')
+      .email('Invalid Email Format'),
+    country: Yup.string().required('Country is required.'),
+    address: Yup.string().required('Address is required.'),
+    postal_code: Yup.string().required('Postal Code is required.'),
+    phone: Yup.string().required('Phone Code is required.'),
+    city: Yup.string().required('City Code is required.'),
   });
 
   const {
@@ -140,31 +140,40 @@ export default function checkout() {
     let products: IProductCheckoout[] = [];
     (managementOrderState.cartList ?? []).map((x: ICart) => {
       let productObj: IProductCheckoout = {
-        id: x.product?.id.toString() ?? "",
+        id: x.product?.id.toString() ?? '',
         qty: Number(x.qty),
+        image_four: '',
+        image_three: '',
+        image_one: '',
+        image_two: '',
       };
 
       if (x.product?.is_custom === 1) {
         productObj.image_custom = x.imageCustomFinal;
+        productObj.image_one = x.imageCustom1;
+        productObj.image_two = x.imageCustom2;
+        productObj.image_three = x.imageCustom3;
+        productObj.image_four = x.imageCustom4;
       }
 
       products.push(productObj);
     });
+
     let bodyForm: ICheckoutOrder = {
       address: data.address,
       city: data.city,
       country: data.country,
-      currency: managementGeneralState.country?.currency ?? "",
+      currency: managementGeneralState.country?.currency ?? '',
       email: data.email,
       name: data.name,
       phone: data.phone,
       postal_code: data.postal_code,
       products: products,
-      uuid_category: managementSubCategoryState.categoryUUID ?? "",
+      uuid_category: managementSubCategoryState.categoryUUID ?? '',
     };
 
     handleSubmitCheckout(bodyForm).then((res) => {
-      router.push("/");
+      router.push('/');
     });
   };
 
@@ -286,7 +295,7 @@ export default function checkout() {
                 className="mt-5 w-full bg-[#ffce07] text-center py-5 text-2xl font-bold"
                 type="submit"
               >
-                {t("paynow")}
+                {t('paynow')}
               </button>
             </form>
           </div>
