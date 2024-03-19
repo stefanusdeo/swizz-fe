@@ -32,6 +32,8 @@ import {
   imageFrames,
   logoLeftBlack,
   logoRightBlack,
+  logoLeftWhite,
+  logoRightWhite,
 } from '@/assets/imagesBase64';
 import domtoimage from 'dom-to-image';
 import UploadImage from '@/component/uploadImage';
@@ -3426,9 +3428,7 @@ export default function Home() {
 
                 {rightLogo === 'white' && (
                   <img
-                    src={
-                      'https://cdnv2.mycustomizer.com/fearlesscustom/1536x864/65a150fbb6952daf9b8b5cfe.png'
-                    }
+                    src={logoRightWhite}
                     style={{
                       position: 'absolute',
                       width: maskImageBg.width,
@@ -3467,9 +3467,7 @@ export default function Home() {
 
                 {leftLogo === 'white' && (
                   <img
-                    src={
-                      'https://cdnv2.mycustomizer.com/fearlesscustom/1536x864/65a1510cc673855618a0137e.png'
-                    }
+                    src={logoLeftWhite}
                     style={{
                       position: 'absolute',
                       width: maskImageBg.width,

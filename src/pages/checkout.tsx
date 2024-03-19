@@ -192,14 +192,23 @@ export default function checkout() {
       let productObj: IProductCheckoout = {
         id: x.product?.id.toString() ?? '',
         qty: Number(x.qty),
+        image_four: '',
+        image_three: '',
+        image_one: '',
+        image_two: '',
       };
 
       if (x.product?.is_custom === 1) {
         productObj.image_custom = x.imageCustomFinal;
+        productObj.image_one = x.imageCustom1;
+        productObj.image_two = x.imageCustom2;
+        productObj.image_three = x.imageCustom3;
+        productObj.image_four = x.imageCustom4;
       }
 
       products.push(productObj);
     });
+
     let bodyForm: ICheckoutOrder = {
       address: data.address,
       city: data.city,
