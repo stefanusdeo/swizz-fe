@@ -72,7 +72,11 @@ export default function Home() {
       setIsGettingProduct(true);
       let tabList: Array<IProductDetail[]> = [];
       managementSubCategoryState.subCategoryList.map((subCat) => {
-        handleGetProductList(subCat.slug, null, 1, 8).then((res) => {
+        handleGetProductList({
+          slugSub: subCat.slug,
+          page: 1,
+          pageSize: 8,
+        }).then((res) => {
           if (res.code === 200 && res.data?.productList) {
             let product = res.data?.productList;
             tabList.push(product);
