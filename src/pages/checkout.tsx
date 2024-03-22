@@ -29,6 +29,7 @@ import { useTranslation } from 'react-i18next';
 import { NumericFormat } from 'react-number-format';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
+import { loadStripe } from '@stripe/stripe-js';
 
 interface ICartSide extends ICart {
   subTotal: number;
@@ -103,6 +104,37 @@ export default function checkout() {
 
   const [showOrderSummaryTop, setshowOrderSummaryTop] = useState(false);
   const [showOrderSummaryB, setshowOrderSummaryB] = useState(false);
+
+  let publicKey = process.env.NEXT_PUBLIC_HOME_PRODUCT;
+
+  const makePayment = async (product: IProductCheckoout[]) => {
+    const stripe = await loadStripe(`${publicKey}`);
+
+    const body = {
+      product,
+    };
+
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_PUBLIC_API}/create-checkout-session`,
+      {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(body),
+      }
+    );
+    const sessionData = await response.json();
+    const result = await stripe?.redirectToCheckout({
+      sessionId: sessionData.id,
+    });
+
+    if (result?.error) {
+      console.log(result.error);
+    }
+  };
 
   const customDetail = (cart: ICartSide) => {
     let collectComp: React.ReactNode[] = [];
@@ -220,9 +252,9 @@ export default function checkout() {
       uuid_category: managementSubCategoryState.categoryUUID ?? '',
     };
 
-    handleSubmitCheckout(bodyForm).then((res) => {
-      router.push('/');
-    });
+    handleSubmitCheckout(bodyForm).then((res) => {});
+
+    makePayment(products);
   };
 
   type CountryData = {

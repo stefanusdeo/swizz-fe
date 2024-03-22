@@ -14,6 +14,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@mui/material": "^5.15.10",
     "@reduxjs/toolkit": "^2.2.1",
+    "@stripe/stripe-js": "^3.0.10",
     "axios": "^1.6.7",
     "canvas": "^2.11.2",
     "dom-to-image": "^2.6.0",
