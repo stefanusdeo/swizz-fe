@@ -93,7 +93,6 @@ const formCheckoutDefault: IFormCheckout = {
 export default function checkout() {
   const { t } = useTranslation();
   const [cartSideBar, setCartSideBar] = useState<ICartSide[]>([]);
-  const router = useRouter();
   const { managementGeneralState } = useGeneral();
 
   const { managementSubCategoryState } = useSubCategory();
@@ -106,35 +105,6 @@ export default function checkout() {
   const [showOrderSummaryB, setshowOrderSummaryB] = useState(false);
 
   let publicKey = process.env.NEXT_PUBLIC_HOME_PRODUCT;
-
-  const makePayment = async (product: IProductCheckoout[]) => {
-    const stripe = await loadStripe(`${publicKey}`);
-
-    const body = {
-      product,
-    };
-
-    const headers = {
-      'Content-Type': 'application/json',
-    };
-
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_PUBLIC_API}/create-checkout-session`,
-      {
-        method: 'POST',
-        headers: headers,
-        body: JSON.stringify(body),
-      }
-    );
-    const sessionData = await response.json();
-    const result = await stripe?.redirectToCheckout({
-      sessionId: sessionData.id,
-    });
-
-    if (result?.error) {
-      console.log(result.error);
-    }
-  };
 
   const customDetail = (cart: ICartSide) => {
     let collectComp: React.ReactNode[] = [];
@@ -216,16 +186,20 @@ export default function checkout() {
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
+    const stripe = await loadStripe(`${publicKey}`);
+
     let products: IProductCheckoout[] = [];
     (managementOrderState.cartList ?? []).map((x: ICart) => {
       let productObj: IProductCheckoout = {
         id: x.product?.id.toString() ?? '',
         qty: Number(x.qty),
-        image_four: '',
-        image_three: '',
-        image_one: '',
-        image_two: '',
+        image_custom: '', //boleh null
+        image_one: '', //boleh null
+        image_two: '', //boleh null
+        image_three: '', //boleh null
+        image_four: '', //boleh null
+        size: JSON.stringify(x.product?.size),
       };
 
       if (x.product?.is_custom === 1) {
@@ -252,9 +226,11 @@ export default function checkout() {
       uuid_category: managementSubCategoryState.categoryUUID ?? '',
     };
 
-    handleSubmitCheckout(bodyForm).then((res) => {});
-
-    makePayment(products);
+    handleSubmitCheckout(bodyForm).then((res: any) =>
+      stripe?.redirectToCheckout({
+        sessionId: res?.id,
+      })
+    );
   };
 
   type CountryData = {

@@ -44,13 +44,14 @@ export interface ICheckoutOrder extends IFormCheckout {
 }
 
 export interface IProductCheckoout {
-  image_four: any;
-  image_three: string | undefined;
-  image_one: string | undefined;
-  image_two: string | undefined;
+  image_four?: any;
+  image_three?: string | undefined;
+  image_one?: string | undefined;
+  image_two?: string | undefined;
   id: string;
   qty: number;
   image_custom?: string;
+  size: string | undefined;
 }
 
 export interface ICustom {
