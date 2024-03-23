@@ -29,9 +29,7 @@ import { NumericFormat } from 'react-number-format';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { loadStripe } from '@stripe/stripe-js';
-import { useRouter } from 'next/navigation';
-
-const router = useRouter();
+import { useRouter } from 'next/router';
 
 interface ICartSide extends ICart {
   subTotal: number;
@@ -107,6 +105,8 @@ export default function checkout() {
   const [showOrderSummaryB, setshowOrderSummaryB] = useState(false);
 
   let publicKey = process.env.NEXT_PUBLIC_HOME_PRODUCT;
+
+  const router = useRouter();
 
   const customDetail = (cart: ICartSide) => {
     let collectComp: React.ReactNode[] = [];
@@ -228,7 +228,11 @@ export default function checkout() {
       uuid_category: managementSubCategoryState.categoryUUID ?? '',
     };
 
-    handleSubmitCheckout(bodyForm).then((res: any) => router.push(res?.url));
+    handleSubmitCheckout(bodyForm).then((res: any) => {
+      if (res && res.url) {
+        router.push(res.url);
+      }
+    });
   };
 
   type CountryData = {
@@ -284,7 +288,7 @@ export default function checkout() {
     <>
       <Navigation checkout={true} />
 
-      <div className="pt-[135px] w-full h-[100vh]">
+      <div className="pt-[135px] flex w-full h-full">
         <div className="flex items-center flex-col  lg:hidden  bg-[#F5F5F5] p-5 ">
           <div
             className="flex cursor-pointer justify-between w-full  items-center"
@@ -347,7 +351,7 @@ export default function checkout() {
             </div>
           </Collapse>
         </div>
-        <div className="w-full flex-col flex lg:flex-row gap-2 h-full justify-start items-start overflow-x-hidden overflow-y-auto">
+        <div className="w-full flex lg:flex-row gap-2 h-full justify-start items-start overflow-x-hidden overflow-y-auto">
           <div className="w-full  h-full  px-6">
             <form
               className="p-2 flex flex-col my-10 lg:my-4 gap-2 lg:gap-2 lg2:gap-6 allDekstop:pt-10 "
@@ -549,14 +553,14 @@ export default function checkout() {
                 </div>
               </div>
               <button
-                className="mt-0 sm:mt-5 mb-5 w-full bg-[#ffce07] text-center py-2 sm:py-5 text-2xl font-bold"
+                className="mt-0 sm:mt-5 md:p-3 mb-5 w-full bg-[#ffce07] text-center py-2 sm:py-5 text-2xl font-bold"
                 type="submit"
               >
                 {t('paynow')}
               </button>
             </form>
           </div>
-          <div className="w-full  hidden lg:block  h-full  bg-[#F5F5F5] pr-4 lg2:pr-20 pl-6 pt-10 content-layer">
+          <div className="w-full hidden lg:block  h-[100vh] bg-[#F5F5F5] pr-4 lg2:pr-20 pl-6 pt-10 ">
             {cartSideBar.map((cart: any, index) => {
               return (
                 <div

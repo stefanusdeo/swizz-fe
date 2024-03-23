@@ -157,7 +157,7 @@ export const submitCheckout =
         const respSetOrder: ICallbackOrder = {
           code: 200,
           message: 'Success Init Cart',
-          data: null,
+          data: response.data,
         };
         dispatch(
           orderSuccess({

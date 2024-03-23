@@ -242,53 +242,56 @@ export default function Home() {
             </div>
 
             <div className="grid  grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 ">
-              {(managementProductState.productList ?? []).map((prod, i) => (
-                <div
-                  onClick={() => router.push(`/product/${prod.slug}`)}
-                  key={prod.id}
-                  className="cursor-pointer "
-                >
-                  <div className=" h-full ">
-                    <img
-                      src={prod.main_img}
-                      alt={prod.name}
-                      className={`h-[90%] p-7 hover:p-5 w-full  object-contain object-center`}
-                    />
-                  </div>
-                  <div className="text-center lg:-mt-4 text-[17px]  font-bold">
-                    {prod.name}
-                  </div>
-                  <div className="text-center  text-[17px]  font-bold">
-                    {managementGeneralState.country?.currency === 'EUR' && (
-                      <NumericFormat
-                        displayType="text"
-                        value={prod.price_eur}
-                        thousandSeparator={','}
-                        decimalSeparator="."
-                        suffix={` ${managementGeneralState.country.currencyLogo}`}
-                      />
-                    )}
-                    {managementGeneralState.country?.currency === 'CHF' && (
-                      <NumericFormat
-                        displayType="text"
-                        value={prod.price_chf}
-                        thousandSeparator={','}
-                        decimalSeparator="."
-                        suffix={` ${managementGeneralState.country.currencyLogo}`}
-                      />
-                    )}
-                    {managementGeneralState.country?.currency === 'USD' && (
-                      <NumericFormat
-                        displayType="text"
-                        value={prod.price_dolar}
-                        thousandSeparator={','}
-                        decimalSeparator="."
-                        suffix={` ${managementGeneralState.country.currencyLogo}`}
-                      />
-                    )}
-                  </div>
-                </div>
-              ))}
+              {(managementProductState.productList ?? []).map(
+                (prod, i) =>
+                  prod.is_custom === isCustom && (
+                    <div
+                      onClick={() => router.push(`/product/${prod.slug}`)}
+                      key={prod.id}
+                      className="cursor-pointer "
+                    >
+                      <div className=" h-full ">
+                        <img
+                          src={prod.main_img}
+                          alt={prod.name}
+                          className={`h-[90%] p-7 hover:p-5 w-full  object-contain object-center`}
+                        />
+                      </div>
+                      <div className="text-center lg:-mt-4 text-[17px]  font-bold">
+                        {prod.name}
+                      </div>
+                      <div className="text-center  text-[17px]  font-bold">
+                        {managementGeneralState.country?.currency === 'EUR' && (
+                          <NumericFormat
+                            displayType="text"
+                            value={prod.price_eur}
+                            thousandSeparator={','}
+                            decimalSeparator="."
+                            suffix={` ${managementGeneralState.country.currencyLogo}`}
+                          />
+                        )}
+                        {managementGeneralState.country?.currency === 'CHF' && (
+                          <NumericFormat
+                            displayType="text"
+                            value={prod.price_chf}
+                            thousandSeparator={','}
+                            decimalSeparator="."
+                            suffix={` ${managementGeneralState.country.currencyLogo}`}
+                          />
+                        )}
+                        {managementGeneralState.country?.currency === 'USD' && (
+                          <NumericFormat
+                            displayType="text"
+                            value={prod.price_dolar}
+                            thousandSeparator={','}
+                            decimalSeparator="."
+                            suffix={` ${managementGeneralState.country.currencyLogo}`}
+                          />
+                        )}
+                      </div>
+                    </div>
+                  )
+              )}
             </div>
           </div>
         </div>
