@@ -23,13 +23,15 @@ import {
 import useGeneral from '@/stores/hooks/general';
 import useOrder from '@/stores/hooks/order';
 import useSubCategory from '@/stores/hooks/subCategory';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NumericFormat } from 'react-number-format';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { loadStripe } from '@stripe/stripe-js';
+import { useRouter } from 'next/navigation';
+
+const router = useRouter();
 
 interface ICartSide extends ICart {
   subTotal: number;
@@ -226,11 +228,7 @@ export default function checkout() {
       uuid_category: managementSubCategoryState.categoryUUID ?? '',
     };
 
-    handleSubmitCheckout(bodyForm).then((res: any) =>
-      stripe?.redirectToCheckout({
-        sessionId: res?.id,
-      })
-    );
+    handleSubmitCheckout(bodyForm).then((res: any) => router.push(res?.url));
   };
 
   type CountryData = {
