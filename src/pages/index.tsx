@@ -15,6 +15,7 @@ import Content1Image from '@/assets/content1.jpg';
 import Content2Image from '@/assets/content2.jpg';
 import MadeByImage from '@/assets/made-by.jpg';
 import Link from 'next/link';
+import toast from 'react-hot-toast';
 
 export default function Home() {
   const { managementSubCategoryState } = useSubCategory();
@@ -44,6 +45,10 @@ export default function Home() {
     handleGetBanner();
     handleGetProductDetail(process.env.NEXT_PUBLIC_HOME_PRODUCT ?? '').then(
       (res) => {
+        if (res.code !== 200) {
+          toast.error('error!');
+        }
+
         if (res.data?.productDetail) {
           setProductHome(res.data?.productDetail);
           handleGetProductImage(

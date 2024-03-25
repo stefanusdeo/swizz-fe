@@ -13,6 +13,7 @@ import { apiGet, apiPost } from '@/api/apiFunction';
 import { API_URL } from '@/api/apiUrl';
 import { listCountry } from '@/component/constant';
 import localforage from 'localforage';
+import toast from 'react-hot-toast';
 
 export const orderPending = (): OrderAction => ({
   type: OrderType.ORDER_PENDING,
@@ -95,6 +96,7 @@ export const modifyCartList = (cartList: ICart[]) => async (dispatch: any) => {
       data: null,
     };
     dispatch(orderError(respSetOrder));
+    toast.error('error!');
 
     return respSetOrder;
   }
@@ -144,6 +146,7 @@ export const addCartList =
         data: null,
       };
       dispatch(orderError(respSetOrder));
+      toast.error('error!');
 
       return respSetOrder;
     }
@@ -173,6 +176,7 @@ export const submitCheckout =
           data: null,
         };
         dispatch(orderError(respSetOrder));
+        toast.error('error!');
 
         return respSetOrder;
       }

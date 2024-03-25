@@ -10,6 +10,7 @@ import {
 import { apiGet } from '@/api/apiFunction';
 import { IErrorType } from '@/stores/types/errorTypes';
 import { API_URL } from '@/api/apiUrl';
+import toast from 'react-hot-toast';
 
 export const productPending = (): ProductAction => ({
   type: ProductType.PRODUCT_PENDING,
@@ -105,6 +106,7 @@ export const getProductList =
           data: null,
         };
         dispatch(productError(respGetProduct));
+        toast.error('error!');
 
         return respGetProduct;
       }
@@ -115,6 +117,7 @@ export const getProductList =
         data: null,
       };
       dispatch(productError(respGetProduct));
+      toast.error('error!');
 
       return respGetProduct;
     }
@@ -154,6 +157,7 @@ export const getProductDetail = (id: string) => async (dispatch: any) => {
           data: null,
         };
         dispatch(productError(respGetProduct));
+        toast.error('error!');
 
         return respGetProduct;
       }
@@ -164,6 +168,7 @@ export const getProductDetail = (id: string) => async (dispatch: any) => {
         data: null,
       };
       dispatch(productError(respGetProduct));
+      toast.error('error!');
 
       return respGetProduct;
     }
@@ -174,6 +179,7 @@ export const getProductDetail = (id: string) => async (dispatch: any) => {
       data: null,
     };
     dispatch(productError(respGetProduct));
+    toast.error('error!');
 
     return respGetProduct;
   }
@@ -226,6 +232,7 @@ export const getProductImage =
           data: null,
         };
         dispatch(productError(respGetProduct));
+        toast.error('error!');
 
         return respGetProduct;
       }
@@ -236,6 +243,7 @@ export const getProductImage =
         data: null,
       };
       dispatch(productError(respGetProduct));
+      toast.error('error!');
 
       return respGetProduct;
     }

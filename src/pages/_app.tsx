@@ -16,6 +16,7 @@ import useOrder from '@/stores/hooks/order';
 import '@/styles/content.scss';
 import Head from 'next/head';
 const Agency = localFont({ src: './../assets/fonts/agencyfb_reg.ttf' });
+import toast, { Toaster } from 'react-hot-toast';
 
 function App({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState<boolean>(true);
@@ -82,6 +83,7 @@ function App({ Component, pageProps }: AppProps) {
           blocking={loading}
           loader={<div className="spinner"></div>}
         >
+          <Toaster position="top-right" reverseOrder={false} />
           <Component {...pageProps} />
         </BlockUi>
       </Provider>
