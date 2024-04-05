@@ -40,9 +40,39 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 hardcode list
+to use just search keyname hardcode
 
 stripe public key = NEXT_PUBLIC_KEY_STRIPE in env
 
 countryDataShipping = in file checkout.tsx line 245
 
 transactionStatu payment = in file transactionStatus.tsx, line 16 & 70
+
+backgroundImageBase64 = in imagesBase64.ts line 1
+
+logoLeftBlack = in imagesBse64.ts line 4
+logoRightBlack = in imagesBse64.ts line 7
+imageFrames = in imagesBse64.ts line 10
+logoLeftWhite = in imagesBse64.ts line 13
+logoRightWhite = in imagesBse64.ts line 16
+
+contentTextTranslate = in content folder -> content.ts
+content1 = in content folder -> content.ts line 47
+content2 = in content folder -> content.ts line 79
+madeBy = in content folder -> content.ts line 28
+
+listColor = in content folder -> constant.ts line 16
+listColorLogo = in content folder -> constant.ts line 14
+listFont = in content folder -> listFont.ts line 59
+listCountry = in content folder -> listCountry.ts line 70
+
+filter range min price and max price in filter.tsx line 128
+
+shoryArray for list shorby filter in [subcategory] -> [type] line 48
+
+calculatePositionRotateText = in utils.ts line 38
+to change position text custom custom
+
+list content image hardcode
+
+Content1Image & Content2Image in index.tsx line 326 and line 398
