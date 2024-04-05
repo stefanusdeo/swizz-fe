@@ -1,37 +1,45 @@
-#FROM node:20-alpine as builder
-FROM node:slim as builder
-#--build-arg
-
-#Set Argumen
-# ARG PORT
-# ARG ENV
-
-# set working directory
+FROM mhart/alpine-node
 WORKDIR /app
-
-
-# add app
-COPY . ./
-#set env file
-# COPY .env.${ENV} .env
+COPY . .
 RUN yarn install
 RUN yarn build
-#RUN npm install
-#RUN npm run build:${BRANCH}
+EXPOSE 3000
+CMD ["yarn", "start"]
 
-#base image
-FROM nginx:latest
-#ARG BRANCH
-#ARG PORT
-#set working directory
-WORKDIR /usr/share/nginx/html/
-#copy build source
-# COPY --from=builder /app/dist/ ./
-COPY --from=builder /app/ ./
-#set env file
-#COPY .env.${BRANCH} .env
-COPY default.conf /etc/nginx/conf.d/default.conf
+# #FROM node:20-alpine as builder
+# FROM node:slim as builder
+# #--build-arg
 
-EXPOSE 8001
+# #Set Argumen
+# # ARG PORT
+# # ARG ENV
 
-CMD ["nginx", "-g", "daemon off;"]
+# # set working directory
+# WORKDIR /app
+
+
+# # add app
+# COPY . ./
+# #set env file
+# # COPY .env.${ENV} .env
+# RUN yarn install
+# RUN yarn build
+# #RUN npm install
+# #RUN npm run build:${BRANCH}
+
+# #base image
+# FROM nginx:latest
+# #ARG BRANCH
+# #ARG PORT
+# #set working directory
+# WORKDIR /usr/share/nginx/html/
+# #copy build source
+# # COPY --from=builder /app/dist/ ./
+# COPY --from=builder /app/ ./
+# #set env file
+# #COPY .env.${BRANCH} .env
+# COPY default.conf /etc/nginx/conf.d/default.conf
+
+# EXPOSE 8001
+
+# CMD ["nginx", "-g", "daemon off;"]
