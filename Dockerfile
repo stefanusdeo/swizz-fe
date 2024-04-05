@@ -1,4 +1,4 @@
-FROM node:alpine as BUILD_IMAGE
+FROM node:slim as BUILD_IMAGE
 WORKDIR /app
 COPY package.json yarn.lock ./
 # install dependencies
@@ -8,7 +8,7 @@ COPY . .
 RUN yarn build
 # remove dev dependencies
 RUN npm prune --production
-FROM node:alpine
+FROM node:slim
 WORKDIR /app
 # copy from build image
 COPY --from=BUILD_IMAGE /app/package.json ./package.json
