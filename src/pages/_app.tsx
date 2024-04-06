@@ -75,6 +75,7 @@ function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>Shinpro.com</title>
+        <meta name="description" content="Shinpro" key="desc" />
       </Head>
       <Provider store={store}>
         <BlockUi
