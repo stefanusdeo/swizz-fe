@@ -3,64 +3,62 @@
 @tailwind utilities;
 
 body {
-    font-family: 'agency';
+  font-family: 'agency';
 }
 
 .MuiDialog-root {
-    padding: 2vw !important;
+  padding: 2vw !important;
 }
 
 .mask1 {
-    -webkit-mask-size: contain;
-    mask-size: contain;
-    mask-position: center center;
-    position: absolute;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  mask-position: center center;
+  position: absolute;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
 
 .text-stroke-border {
-    -webkit-text-stroke: 0.3px #000;
+  -webkit-text-stroke: 0.3px #000;
 }
 
-
 @font-face {
-    font-family: 'agency';
-    src: url('/static/fonts/agencyfb_reg.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'agency';
+  src: url('../../public/static/fonts/agencyfb_reg.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 .overlay-banner {
-    background: rgba(0, 0, 0, 0.5);
-
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .background-banner {
-    background: url('/static/banner-background.jpeg');
-    background-size: cover;
-    background-position: center;
+  background: url('../../public/static/banner-background.jpeg');
+  background-size: cover;
+  background-position: center;
 }
 
 .MuiBadge-badge {
-    background-color: #64ffcb !important;
-    color: black !important;
+  background-color: #64ffcb !important;
+  color: black !important;
 }
 
 .content-layer {
-    min-height: calc(100vh - 200px);
+  min-height: calc(100vh - 200px);
 }
 
 .content-side {
-    min-height: calc(100vh - 180px);
+  min-height: calc(100vh - 180px);
 }
 
 .limited-lines {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    -webkit-line-clamp: 1;
-    /* Jumlah baris yang ingin ditampilkan */
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  /* Jumlah baris yang ingin ditampilkan */
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
