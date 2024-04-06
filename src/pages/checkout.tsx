@@ -288,7 +288,7 @@ export default function checkout() {
     <>
       <Navigation checkout={true} />
 
-      <div className="pt-[135px] flex w-full h-full">
+      <div className="pt-[135px] w-full h-full">
         <div className="flex items-center flex-col  lg:hidden  bg-[#F5F5F5] p-5 ">
           <div
             className="flex cursor-pointer justify-between w-full  items-center"
