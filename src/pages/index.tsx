@@ -97,13 +97,14 @@ export default function Home() {
     let collectComp: React.ReactNode[] = [];
     let articleComp: React.ReactNode[] = [];
     let listProd: IProductDetail[] = productListSub[index] ?? [];
+
     listProd.map((prod, index) => {
       if (index === collect || index === listProd.length - 1) {
         collectComp.push(
           <div key={prod.id} className="w-full">
             <img
               src={prod.main_img}
-              className="w-full h-auto object-cover object-center"
+              className="w-full h-[20vh] sm:h-[35vh] object-scale-down "
             />
             <h1 className="text-center tracking-[1.5px] mt-3">{prod.name}</h1>
             <h1 className="text-center tracking-[1.5px] mt-3">
@@ -138,7 +139,11 @@ export default function Home() {
           </div>
         );
         let renderComp = (
-          <div className="grid grid-cols-4 gap-10 min-[263px]">
+          <div
+            className={`${
+              listProd.length > 1 && 'grid grid-cols-3'
+            } sm:grid  sm:grid-cols-4 gap-10 min-[263px]`}
+          >
             {collectComp}
           </div>
         );
@@ -150,7 +155,7 @@ export default function Home() {
           <div key={prod.id} className="w-full">
             <img
               src={prod.main_img}
-              className="w-full h-auto object-cover object-center"
+              className="w-full h-[20vh] sm:h-[35vh] object-scale-down "
             />
             <h1 className="text-center tracking-[1.5px] mt-3">{prod.name}</h1>
             <h1 className="text-center tracking-[1.5px] mt-3">
@@ -464,13 +469,14 @@ export default function Home() {
 
           {/* Content for each tab */}
           <div className="mt-4">
-            <div className="w-full mt-6">
+            <div className="w-full h-[30vh] sm:h-[60vh] ">
               <Carousel
                 animation={'slide'}
+                className="h-[30vh] sm:h-[60vh] pt-[5vh] sm:pt-20 sm:pl-[10vh]"
                 indicators={false}
                 navButtonsAlwaysVisible={true}
               >
-                {renderProduct(subCategoryTabs)}
+                <div className="h-[50vh]">{renderProduct(subCategoryTabs)}</div>
               </Carousel>
             </div>
           </div>

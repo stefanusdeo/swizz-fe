@@ -480,8 +480,6 @@ export default function Home() {
       customList.push(colorProductCustom);
     }
 
-    console.log(customList, 'o');
-
     addToCart.customList = customList;
 
     handleAddCartList(addToCart);

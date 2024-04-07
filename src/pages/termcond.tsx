@@ -1,11 +1,11 @@
-import Foooter from "@/component/footer";
-import Navigation from "@/component/navigation";
+import Foooter from '@/component/footer';
+import Navigation from '@/component/navigation';
 
-import ShinLogo from "@/assets/shinlogo.png";
-import Image from "next/image";
-import useGeneral from "@/stores/hooks/general";
-import { useEffect, useState } from "react";
-import BlockUi from "react-block-ui";
+import ShinLogo from '@/assets/shinlogo.png';
+import Image from 'next/image';
+import useGeneral from '@/stores/hooks/general';
+import { useEffect, useState } from 'react';
+import BlockUi from 'react-block-ui';
 
 export default function aboutus() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -15,13 +15,12 @@ export default function aboutus() {
     handleGetTermCond().then((res) => {
       if (res.code === 200) {
         setIsLoading(false);
-        console.log(res.data);
         let findContent = res.data?.termCond?.find(
           (x) => x.lang === managementGeneralState.language
         );
         if (findContent) {
           let htmlString = findContent.content;
-          const container = document.getElementById("aboutus-content");
+          const container = document.getElementById('aboutus-content');
           if (container) {
             container.innerHTML = htmlString;
           }
