@@ -13,7 +13,7 @@ const TranactionStatus = () => {
       <Navigation />
       <div className="bg-[#F2F2F2] pt-[130px] h-[100vh] flex items-center justify-center">
         <div className="bg-white rounded-md shadow-md  w-[370px] flex flex-col items-center justify-center h-[300px]">
-          {status === 'succes' && (
+          {status === 'success' && (
             <>
               <PaymentsRoundedIcon
                 className="text-green-500"

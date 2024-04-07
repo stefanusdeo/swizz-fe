@@ -229,8 +229,8 @@ export default function checkout() {
     };
 
     handleSubmitCheckout(bodyForm).then((res: any) => {
-      if (res && res.url) {
-        router.push(res.url);
+      if (res?.data && res?.data.url) {
+        router.push(res?.data?.url);
       }
     });
   };
