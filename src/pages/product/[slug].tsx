@@ -55,6 +55,7 @@ import localforage from 'localforage';
 import useOrder from '@/stores/hooks/order';
 import html2canvas from 'html2canvas';
 import ImageMagnifier from '@/component/ImageMagnifier';
+import toast from 'react-hot-toast';
 
 interface IImageProp {
   width: number;
@@ -398,9 +399,25 @@ export default function Home() {
   };
 
   const addToCartCustom = async () => {
-    setModalCustom(false);
-    setCustomProcess(true);
+    if (
+      customImages1 === null &&
+      customImages2 === null &&
+      customImages3 === null &&
+      customImages4 === null
+    ) {
+      toast('please custom image first', {
+        style: {
+          borderRadius: '10px',
+          background: 'yellow',
+          color: 'black',
+        },
+      });
+    } else {
+      setCustomProcess(true);
+      setModalCustom(false);
+    }
   };
+
   useEffect(() => {
     if (customProcess === true) {
       sumbitCustomProduct();
