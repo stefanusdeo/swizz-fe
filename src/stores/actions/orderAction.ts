@@ -177,7 +177,13 @@ export const submitCheckout =
         };
         dispatch(orderError(respSetOrder));
         toast.error('error!');
+        if (response.status === 429) {
+          toast.error('messagenya too many request!');
+        }
 
+        if (response.status === 413) {
+          toast.error('messagenya file too large');
+        }
         return respSetOrder;
       }
     } catch (e) {
@@ -187,7 +193,8 @@ export const submitCheckout =
         data: null,
       };
       dispatch(orderError(respSetOrder));
-
+      console.log(e);
+      toast.error('error!, Failed Checkout, log in console');
       return respSetOrder;
     }
   };

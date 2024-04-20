@@ -189,8 +189,6 @@ export default function checkout() {
   });
 
   const onSubmit = async (data: any) => {
-    const stripe = await loadStripe(`${publicKey}`);
-
     let products: IProductCheckoout[] = [];
     (managementOrderState.cartList ?? []).map((x: ICart) => {
       let productObj: IProductCheckoout = {

@@ -21,7 +21,10 @@ const TranactionStatus = () => {
               />
               <div className="font-bold text-[40px]">Payment Succesful</div>
               <div className="text-[20px]">Thank you fir your payment!</div>
-              <div className="bg-green-500 text-[17px] mt-3 p-2 px-5 text-white cursor-pointer rounded-full">
+              <div
+                className="bg-green-500 text-[17px] mt-3 p-2 px-5 text-white cursor-pointer rounded-full"
+                onClick={() => router.push('/')}
+              >
                 Continue Shopping
               </div>
             </>
