@@ -76,3 +76,6 @@ to change position text custom custom
 list content image hardcode
 
 Content1Image & Content2Image in index.tsx line 326 and line 398
+
+
+<!-- Security scan triggered at 2025-09-09 06:17:34 -->
